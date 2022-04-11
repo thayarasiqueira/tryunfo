@@ -88,14 +88,15 @@ class Form extends Component {
             <input
               type="checkbox"
               data-testid="trunfo-input"
-              name="trunfo"
-              value={ cardTrunfo }
               onChange={ onInputChange }
+              name="trunfo"
+              checked={ cardTrunfo }
             />
           </label>
           <button
             type="submit"
             data-testid="save-button"
+            disabled={ isSaveButtonDisabled }
             value={ isSaveButtonDisabled }
             onClick={ onSaveButtonClick }
           >
@@ -117,7 +118,7 @@ Form.propTypes = {
   cardRare: PropTypes.string.isRequired,
   cardTrunfo: PropTypes.bool.isRequired,
   isSaveButtonDisabled: PropTypes.bool.isRequired,
-  onInputChange: PropTypes.func.isRequired,
+  onInputChange: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]).isRequired,
   onSaveButtonClick: PropTypes.func.isRequired,
 };
 
