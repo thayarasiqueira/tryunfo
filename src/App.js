@@ -2,21 +2,23 @@ import React from 'react';
 import Form from './components/Form';
 import Card from './components/Card';
 
+const INITIAL = {
+  cardName: '',
+  cardDescription: '',
+  cardAttr1: 0,
+  cardAttr2: 0,
+  cardAttr3: 0,
+  cardImage: '',
+  cardRare: 'normal',
+  cardTrunfo: false,
+  isSaveButtonDisabled: true,
+};
+
 class App extends React.Component {
   constructor() {
     super();
 
-    this.state = {
-      cardName: '',
-      cardDescription: '',
-      cardAttr1: 0,
-      cardAttr2: 0,
-      cardAttr3: 0,
-      cardImage: '',
-      cardRare: 'normal',
-      cardTrunfo: false,
-      isSaveButtonDisabled: true,
-    };
+    this.state = INITIAL;
     this.onInputChange = this.onInputChange.bind(this);
     this.onSaveButtonClick = this.onSaveButtonClick.bind(this);
   }
@@ -67,7 +69,7 @@ class App extends React.Component {
   }
 
   onSaveButtonClick() {
-    console.log(this);
+    this.setState(INITIAL);
   }
 
   render() {

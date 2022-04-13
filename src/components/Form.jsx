@@ -93,16 +93,16 @@ class Form extends Component {
               checked={ cardTrunfo }
             />
           </label>
-          <button
-            type="submit"
-            data-testid="save-button"
-            disabled={ isSaveButtonDisabled }
-            value={ isSaveButtonDisabled }
-            onClick={ onSaveButtonClick }
-          >
-            Salvar
-          </button>
         </form>
+        <button
+          type="submit"
+          data-testid="save-button"
+          disabled={ isSaveButtonDisabled }
+          value={ isSaveButtonDisabled }
+          onClick={ onSaveButtonClick }
+        >
+          Salvar
+        </button>
       </div>
     );
   }
