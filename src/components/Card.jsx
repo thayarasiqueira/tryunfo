@@ -5,25 +5,7 @@ class Card extends React.Component {
   render() {
     const { cardName, cardDescription, cardAttr1,
       cardAttr2, cardAttr3, cardImage, cardRare,
-      cardTrunfo } = this.props;
-    let element;
-    if (cardTrunfo === false) {
-      element = (
-        <h3
-          style={ { display: 'none' } }
-        >
-          Super Trunfo
-        </h3>
-      );
-    } else {
-      element = (
-        <h3
-          data-testid="trunfo-card"
-        >
-          Super Trunfo
-        </h3>
-      );
-    }
+      cardTrunfo, hasTrunfo } = this.props;
     return (
       <section>
         <h2 data-testid="name-card">{ cardName }</h2>
@@ -39,7 +21,14 @@ class Card extends React.Component {
           <li data-testid="attr3-card">{ cardAttr3 }</li>
         </ul>
         <p data-testid="rare-card">{ cardRare }</p>
-        { element }
+        { !cardTrunfo ? null
+          : (
+            <h3
+              data-testid="trunfo-card"
+              value={ hasTrunfo }
+            >
+              Super Trunfo
+            </h3>) }
       </section>);
   }
 }
@@ -53,6 +42,7 @@ Card.propTypes = {
   cardImage: PropTypes.string.isRequired,
   cardRare: PropTypes.string.isRequired,
   cardTrunfo: PropTypes.bool.isRequired,
+  hasTrunfo: PropTypes.bool.isRequired,
 };
 
 export default Card;

@@ -5,7 +5,7 @@ class Form extends Component {
   render() {
     const { cardName, cardDescription, cardAttr1,
       cardAttr2, cardAttr3, cardImage, cardRare,
-      cardTrunfo, isSaveButtonDisabled,
+      cardTrunfo, hasTrunfo, isSaveButtonDisabled,
       onSaveButtonClick, onInputChange } = this.props;
     return (
       <div>
@@ -83,15 +83,18 @@ class Form extends Component {
               <option value="muito raro">muito raro</option>
             </select>
           </label>
-          <label htmlFor="cardTrunfo">
-            Super Trybe Tryunfo
-            <input
-              type="checkbox"
-              data-testid="trunfo-input"
-              onChange={ onInputChange }
-              name="cardTrunfo"
-              checked={ cardTrunfo }
-            />
+          <label className="label" htmlFor="input-trunfo">
+            Super Trybe Trunfo
+            { hasTrunfo ? <p>Você já tem um Super Trunfo em seu baralho</p>
+              : (
+                <input
+                  type="checkbox"
+                  data-testid="trunfo-input"
+                  name="cardTrunfo"
+                  checked={ cardTrunfo }
+                  onChange={ onInputChange }
+                />
+              )}
           </label>
         </form>
         <button
@@ -117,6 +120,7 @@ Form.propTypes = {
   cardImage: PropTypes.string.isRequired,
   cardRare: PropTypes.string.isRequired,
   cardTrunfo: PropTypes.bool.isRequired,
+  hasTrunfo: PropTypes.bool.isRequired,
   isSaveButtonDisabled: PropTypes.bool.isRequired,
   onSaveButtonClick: PropTypes.func.isRequired,
   onInputChange: PropTypes.func.isRequired,
