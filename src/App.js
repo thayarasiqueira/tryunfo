@@ -132,7 +132,7 @@ class App extends React.Component {
           hasTrunfo={ hasTrunfo }
         />
         <span>
-          {savedCard.length > 0  ? savedCard.map((e) => (
+          {savedCard.length > 0 ? savedCard.map((e) => (
             <Card
               key={ e.cardName }
               cardName={ e.cardName }
