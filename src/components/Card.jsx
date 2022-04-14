@@ -28,8 +28,9 @@ class Card extends React.Component {
               value={ hasTrunfo }
             >
               Super Trunfo
-            </h3>) }
-      </section>);
+            </h3>)}
+      </section>
+    );
   }
 }
 

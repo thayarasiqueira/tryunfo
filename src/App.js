@@ -5,9 +5,9 @@ import Card from './components/Card';
 const INITIAL = {
   cardName: '',
   cardDescription: '',
-  cardAttr1: 0,
-  cardAttr2: 0,
-  cardAttr3: 0,
+  cardAttr1: '0',
+  cardAttr2: '0',
+  cardAttr3: '0',
   cardImage: '',
   cardRare: 'normal',
   cardTrunfo: false,
@@ -15,6 +15,8 @@ const INITIAL = {
   isSaveButtonDisabled: true,
   savedCard: [],
 };
+const maxTotal = 210;
+const maxNumber = 90;
 
 class App extends React.Component {
   constructor() {
@@ -33,38 +35,26 @@ class App extends React.Component {
         cardImage, cardRare, savedCard } = this.state;
       const verifyTrunfo = savedCard.some((e) => e.cardTrunfo === true);
       if (verifyTrunfo || target.checked) {
-        this.setState({
-          hasTrunfo: true,
+        this.setState({ hasTrunfo: true,
         });
       } else {
-        this.setState({
-          hasTrunfo: false,
+        this.setState({ hasTrunfo: false,
         });
       }
-      const maxTotal = 210;
-      const maxNumber = 90;
+
       const casesAbledBtn = [
-        cardName !== '',
-        cardDescription !== '',
-        cardImage !== '',
-        cardRare !== '',
-        Number(cardAttr1) + Number(cardAttr2) + Number(cardAttr3) <= maxTotal,
-        Number(cardAttr1) <= maxNumber,
-        Number(cardAttr1) >= 0,
-        Number(cardAttr2) <= maxNumber,
-        Number(cardAttr2) >= 0,
-        Number(cardAttr3) <= maxNumber,
-        Number(cardAttr3) >= 0,
+        cardName !== '', cardDescription !== '', cardImage !== '',
+        cardRare !== '', Number(cardAttr1) + Number(cardAttr2) + Number(cardAttr3)
+        <= maxTotal, Number(cardAttr1) <= maxNumber, Number(cardAttr1) >= 0,
+        Number(cardAttr2) <= maxNumber, Number(cardAttr2) >= 0,
+        Number(cardAttr3) <= maxNumber, Number(cardAttr3) >= 0,
       ];
+
       const verify = casesAbledBtn.every((e) => e === true);
       if (verify) {
-        this.setState({
-          isSaveButtonDisabled: false,
-        });
+        this.setState({ isSaveButtonDisabled: false });
       } else {
-        this.setState({
-          isSaveButtonDisabled: true,
-        });
+        this.setState({ isSaveButtonDisabled: true });
       }
     });
   }
@@ -72,8 +62,7 @@ class App extends React.Component {
   onSaveButtonClick() {
     const { cardName, cardDescription, cardAttr1, cardAttr2, cardAttr3,
       cardImage, cardRare, cardTrunfo, savedCard } = this.state;
-    const newCard = {
-      cardName,
+    const newCard = { cardName,
       cardDescription,
       cardAttr1,
       cardAttr2,
@@ -93,7 +82,9 @@ class App extends React.Component {
       cardRare: 'normal',
       isSaveButtonDisabled: true,
     });
-    this.setState((prevState) => ({ savedCard: [...prevState.savedCard, newCard] }));
+    this.setState((prevState) => (
+      { savedCard: [...prevState.savedCard, newCard],
+      }));
   }
 
   deleteBtn({ target }) {
@@ -123,7 +114,7 @@ class App extends React.Component {
           onInputChange={ this.onInputChange }
         />
         <Card
-          cardName={ cardName.toUpperCase() }
+          cardName={ cardName }
           cardDescription={ cardDescription }
           cardAttr1={ cardAttr1 }
           cardAttr2={ cardAttr2 }
