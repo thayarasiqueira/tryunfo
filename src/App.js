@@ -42,7 +42,6 @@ class App extends React.Component {
           hasTrunfo: false,
         });
       }
-
       const maxTotal = 210;
       const maxNumber = 90;
       const minNumber = 0;
