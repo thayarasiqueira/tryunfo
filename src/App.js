@@ -45,7 +45,6 @@ class App extends React.Component {
 
       const maxTotal = 210;
       const maxNumber = 90;
-
       const minNumber = 0;
       const casesAbledBtn = [
         cardName !== '',
@@ -159,7 +158,8 @@ class App extends React.Component {
               >
                 Excluir
               </button>
-            </div>))}
+            </div>
+          ))}
         </span>
       </main>
     );
