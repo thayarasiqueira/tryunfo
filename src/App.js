@@ -44,7 +44,6 @@ class App extends React.Component {
       }
       const maxTotal = 210;
       const maxNumber = 90;
-      const minNumber = 0;
       const casesAbledBtn = [
         cardName !== '',
         cardDescription !== '',
@@ -52,11 +51,11 @@ class App extends React.Component {
         cardRare !== '',
         Number(cardAttr1) + Number(cardAttr2) + Number(cardAttr3) <= maxTotal,
         Number(cardAttr1) <= maxNumber,
-        Number(cardAttr1) >= minNumber,
+        Number(cardAttr1) >= 0,
         Number(cardAttr2) <= maxNumber,
-        Number(cardAttr2) >= minNumber,
+        Number(cardAttr2) >= 0,
         Number(cardAttr3) <= maxNumber,
-        Number(cardAttr3) >= minNumber,
+        Number(cardAttr3) >= 0,
       ];
       const verify = casesAbledBtn.every((e) => e === true);
       if (verify) {
