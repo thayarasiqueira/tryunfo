@@ -23,6 +23,7 @@ class App extends React.Component {
     this.state = INITIAL;
     this.onInputChange = this.onInputChange.bind(this);
     this.onSaveButtonClick = this.onSaveButtonClick.bind(this);
+    this.deleteBtn = this.deleteBtn.bind(this);
   }
 
   onInputChange({ target }) {
@@ -44,6 +45,7 @@ class App extends React.Component {
 
       const maxTotal = 210;
       const maxNumber = 90;
+
       const minNumber = 0;
       const casesAbledBtn = [
         cardName !== '',
@@ -73,7 +75,7 @@ class App extends React.Component {
 
   onSaveButtonClick() {
     const { cardName, cardDescription, cardAttr1, cardAttr2, cardAttr3,
-      cardImage, cardRare, cardTrunfo, savedCard } = this.state;
+      cardImage, cardRare, cardTrunfo, savedCard, objCard } = this.state;
     const newCard = {
       cardName,
       cardDescription,
@@ -96,6 +98,12 @@ class App extends React.Component {
       isSaveButtonDisabled: true,
     });
     this.setState((prevState) => ({ savedCard: [...prevState.savedCard, newCard] }));
+  }
+
+  deleteBtn({ target }) {
+    const { savedCard } = this.state;
+    const removeCard = savedCard.filter((element) => element.cardName !== target.value);
+    this.setState(({ savedCard: removeCard, hasTrunfo: false }));
   }
 
   render() {
@@ -130,19 +138,28 @@ class App extends React.Component {
           hasTrunfo={ hasTrunfo }
         />
         <span className="allCards">
-          {savedCard.length > 0 ? savedCard.map((e) => (
-            <Card
-              key={ e.cardName }
-              cardName={ e.cardName }
-              cardDescription={ e.cardDescription }
-              cardAttr1={ e.cardAttr1 }
-              cardAttr2={ e.cardAttr2 }
-              cardAttr3={ e.cardAttr3 }
-              cardImage={ e.cardImage }
-              cardRare={ e.cardRare }
-              cardTrunfo={ e.cardTrunfo }
-              hasTrunfo={ e.hasTrunfo }
-            />)) : null}
+          { savedCard.map((e) => (
+            <div key={ e.cardName }>
+              <Card
+                cardName={ e.cardName }
+                cardDescription={ e.cardDescription }
+                cardAttr1={ e.cardAttr1 }
+                cardAttr2={ e.cardAttr2 }
+                cardAttr3={ e.cardAttr3 }
+                cardImage={ e.cardImage }
+                cardRare={ e.cardRare }
+                cardTrunfo={ e.cardTrunfo }
+                hasTrunfo={ e.hasTrunfo }
+              />
+              <button
+                type="button"
+                onClick={ this.deleteBtn }
+                data-testid="delete-button"
+                value={ e.cardName }
+              >
+                Excluir
+              </button>
+            </div>))}
         </span>
       </main>
     );
