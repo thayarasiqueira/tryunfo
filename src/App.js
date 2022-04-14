@@ -19,7 +19,6 @@ const INITIAL = {
 class App extends React.Component {
   constructor() {
     super();
-
     this.state = INITIAL;
     this.onInputChange = this.onInputChange.bind(this);
     this.onSaveButtonClick = this.onSaveButtonClick.bind(this);
