@@ -1,0 +1,47 @@
+/* .mainContainer {
+    display: flex;
+    flex-direction: row;
+    max-height: none;
+    height: 59em;
+    flex-wrap: wrap;
+    justify-content:space-between;
+    background-color: gray;
+}
+
+.formContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content:flex-start;
+    align-items:flex-start;
+    width: 10%;
+    background-color: white;
+}
+
+.cardContainer {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 50%;
+    background-color: rgb(25, 55, 25);
+    align-items: center;
+}
+
+.formContainer img {
+    max-width:20%;
+    max-height:20%;
+    width: auto;
+    height: auto;
+}
+
+.allCards {
+    width: 25%;
+    height: 40%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+h2 {
+    text-align: center;
+} */

@@ -32,7 +32,7 @@ class App extends React.Component {
       const { cardName, cardDescription, cardAttr1, cardAttr2, cardAttr3,
         cardImage, cardRare, savedCard } = this.state;
       const verifyTrunfo = savedCard.some((e) => e.cardTrunfo === true);
-      if (verifyTrunfo) {
+      if (verifyTrunfo || target.checked) {
         this.setState({
           hasTrunfo: true,
         });
@@ -93,8 +93,6 @@ class App extends React.Component {
       cardAttr3: 0,
       cardImage: '',
       cardRare: 'normal',
-      cardTrunfo: false,
-      hasTrunfo: false,
       isSaveButtonDisabled: true,
     });
     this.setState((prevState) => ({ savedCard: [...prevState.savedCard, newCard] }));
@@ -105,7 +103,7 @@ class App extends React.Component {
       cardImage, cardRare, cardTrunfo, hasTrunfo,
       isSaveButtonDisabled, savedCard } = this.state;
     return (
-      <main>
+      <main className="mainContainer">
         <Form
           cardName={ cardName }
           cardDescription={ cardDescription }
@@ -121,7 +119,7 @@ class App extends React.Component {
           onInputChange={ this.onInputChange }
         />
         <Card
-          cardName={ cardName }
+          cardName={ cardName.toUpperCase() }
           cardDescription={ cardDescription }
           cardAttr1={ cardAttr1 }
           cardAttr2={ cardAttr2 }
@@ -131,7 +129,7 @@ class App extends React.Component {
           cardTrunfo={ cardTrunfo }
           hasTrunfo={ hasTrunfo }
         />
-        <span>
+        <span className="allCards">
           {savedCard.length > 0 ? savedCard.map((e) => (
             <Card
               key={ e.cardName }
