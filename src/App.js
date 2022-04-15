@@ -14,7 +14,6 @@ const INITIAL = {
   hasTrunfo: false,
   isSaveButtonDisabled: true,
   savedCard: [],
-  filteredCards: '',
 };
 const maxTotal = 210;
 const maxNumber = 90;
@@ -26,7 +25,8 @@ class App extends React.Component {
     this.onInputChange = this.onInputChange.bind(this);
     this.onSaveButtonClick = this.onSaveButtonClick.bind(this);
     this.deleteBtn = this.deleteBtn.bind(this);
-    this.filterCards = this.filterCards.bind(this);
+    this.filterName = this.filterName.bind(this);
+    this.filterRare = this.filterRare.bind(this);
   }
 
   onInputChange({ target }) {
@@ -84,7 +84,6 @@ class App extends React.Component {
       cardRare: 'normal',
       isSaveButtonDisabled: true,
       cardTrunfo: false,
-      filteredCard: '',
     });
     this.setState((prevState) => (
       { savedCard: [...prevState.savedCard, newCard],
@@ -97,11 +96,18 @@ class App extends React.Component {
     this.setState(({ savedCard: removeCard, hasTrunfo: false }));
   }
 
-  filterCards({ target }) {
-    const { savedCard, filteredCards } = this.state;
-    this.setState({ filteredCards: target.value });
-    const getCard = savedCard.filter((e) => e.cardName.includes(filteredCards));
-    this.setState({ savedCard: getCard, hasTrunfo: false });
+  filterName({ target }) {
+    const { savedCard } = this.state;
+    const getName = savedCard.filter((e) => e.cardName.includes(target.value));
+    this.setState({ savedCard: getName, hasTrunfo: false });
+  }
+
+  filterRare({ target }) {
+    if (target.value !== 'todas') {
+      const { savedCard } = this.state;
+      const getRare = savedCard.filter((e) => e.cardRare === target.value);
+      this.setState({ savedCard: getRare, hasTrunfo: false });
+    }
   }
 
   render() {
@@ -138,11 +144,28 @@ class App extends React.Component {
         />
         <span className="allCards">
           Filtros de Busca
-          <input
-            type="text "
-            data-testid="name-filter"
-            onChange={ this.filterCards }
-          />
+          <label htmlFor="name-filter">
+            <input
+              type="text "
+              data-testid="name-filter"
+              onChange={ this.filterName }
+              placeholder="Nome da carta"
+              id="name-filter"
+            />
+          </label>
+          <label htmlFor="filter-rare">
+            <select
+              type="select"
+              data-testid="rare-filter"
+              onChange={ this.filterRare }
+              id="filter-rare"
+            >
+              <option value="todas">todas</option>
+              <option value="normal">normal</option>
+              <option value="raro">raro</option>
+              <option value="muito raro">muito raro</option>
+            </select>
+          </label>
           Todas as cartas
           { savedCard.map((e) => (
             <div key={ e.cardName }>
