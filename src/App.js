@@ -14,6 +14,7 @@ const INITIAL = {
   hasTrunfo: false,
   isSaveButtonDisabled: true,
   savedCard: [],
+  filteredCards: '',
 };
 const maxTotal = 210;
 const maxNumber = 90;
@@ -25,6 +26,7 @@ class App extends React.Component {
     this.onInputChange = this.onInputChange.bind(this);
     this.onSaveButtonClick = this.onSaveButtonClick.bind(this);
     this.deleteBtn = this.deleteBtn.bind(this);
+    this.filterCards = this.filterCards.bind(this);
   }
 
   onInputChange({ target }) {
@@ -81,6 +83,8 @@ class App extends React.Component {
       cardImage: '',
       cardRare: 'normal',
       isSaveButtonDisabled: true,
+      cardTrunfo: false,
+      filteredCard: '',
     });
     this.setState((prevState) => (
       { savedCard: [...prevState.savedCard, newCard],
@@ -91,6 +95,13 @@ class App extends React.Component {
     const { savedCard } = this.state;
     const removeCard = savedCard.filter((element) => element.cardName !== target.value);
     this.setState(({ savedCard: removeCard, hasTrunfo: false }));
+  }
+
+  filterCards({ target }) {
+    const { savedCard, filteredCards } = this.state;
+    this.setState({ filteredCards: target.value });
+    const getCard = savedCard.filter((e) => e.cardName.includes(filteredCards));
+    this.setState({ savedCard: getCard, hasTrunfo: false });
   }
 
   render() {
@@ -113,6 +124,7 @@ class App extends React.Component {
           onSaveButtonClick={ this.onSaveButtonClick }
           onInputChange={ this.onInputChange }
         />
+        <p>Pré-visualização da carta</p>
         <Card
           cardName={ cardName }
           cardDescription={ cardDescription }
@@ -125,6 +137,13 @@ class App extends React.Component {
           hasTrunfo={ hasTrunfo }
         />
         <span className="allCards">
+          Filtros de Busca
+          <input
+            type="text "
+            data-testid="name-filter"
+            onChange={ this.filterCards }
+          />
+          Todas as cartas
           { savedCard.map((e) => (
             <div key={ e.cardName }>
               <Card
