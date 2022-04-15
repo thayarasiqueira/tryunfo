@@ -17,6 +17,7 @@ const INITIAL = {
 };
 const maxTotal = 210;
 const maxNumber = 90;
+let filter = false;
 
 class App extends React.Component {
   constructor() {
@@ -27,6 +28,7 @@ class App extends React.Component {
     this.deleteBtn = this.deleteBtn.bind(this);
     this.filterName = this.filterName.bind(this);
     this.filterRare = this.filterRare.bind(this);
+    this.filterTrunfo = this.filterTrunfo.bind(this);
   }
 
   onInputChange({ target }) {
@@ -110,6 +112,13 @@ class App extends React.Component {
     }
   }
 
+  filterTrunfo({ target }) {
+    if (target.checked) filter = true;
+    const { savedCard } = this.state;
+    const getTrunfo = savedCard.filter((e) => e.cardTrunfo === true);
+    this.setState({ savedCard: getTrunfo });
+  }
+
   render() {
     const { cardName, cardDescription, cardAttr1, cardAttr2, cardAttr3,
       cardImage, cardRare, cardTrunfo, hasTrunfo,
@@ -146,6 +155,7 @@ class App extends React.Component {
           Filtros de Busca
           <label htmlFor="name-filter">
             <input
+              disabled={ filter }
               type="text "
               data-testid="name-filter"
               onChange={ this.filterName }
@@ -155,6 +165,7 @@ class App extends React.Component {
           </label>
           <label htmlFor="filter-rare">
             <select
+              disabled={ filter }
               type="select"
               data-testid="rare-filter"
               onChange={ this.filterRare }
@@ -165,6 +176,15 @@ class App extends React.Component {
               <option value="raro">raro</option>
               <option value="muito raro">muito raro</option>
             </select>
+          </label>
+          <label htmlFor="filter-trunfo">
+            Super Trybe Trunfo
+            <input
+              type="checkbox"
+              data-testid="trunfo-filter"
+              onChange={ this.filterTrunfo }
+              id="filter-trunfo-filter"
+            />
           </label>
           Todas as cartas
           { savedCard.map((e) => (
